@@ -3,7 +3,18 @@
 
 void bubble_sort(int*, int);
 void selection_sort(int*, int);
+
 typedef std::function<void(int*, int)> Sort_function;
+
+enum Sorting_enum {
+    BUBBLE_SORT,
+    SELECTION_SORT
+};
+
+struct SortingOption {
+    Sorting_enum strategy;
+    Sort_function sortFunction;
+};
 
 int main() {
     int choice;
@@ -14,13 +25,17 @@ int main() {
     std::cout << "Enter your choice: " << std::endl;
     std::cin >> choice;
     
+    SortingOption sortingOptions[] = {
+        {Sorting_enum::BUBBLE_SORT, bubble_sort},
+        {Sorting_enum::SELECTION_SORT, selection_sort}
+    };
     
     switch (choice) {
         case 1:
-            sort = bubble_sort;
+            sort = sortingOptions[0].sortFunction;
             break;
         case 2:
-            sort = selection_sort;
+            sort = sortingOptions[1].sortFunction;
             break;
         default:
             std::cout << "Invalid choice." << std::endl;
@@ -49,30 +64,30 @@ int main() {
 }
 
 //bubble sort
-void bubble_sort(int* array, int size) {
+void bubble_sort(int* arr, int size) {
     for (int i = 0; i < size - 1; ++i) {
         for (int j = 0; j < size - i - 1; ++j) {
-            if (array[j] > array[j + 1]) {
-                int temp = array[j];
-                array[j] = array[j + 1];
-                array[j + 1] = temp;
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
             }
         }
     }
 }
 
-// Selection Sort function
-void selection_sort(int* array, int size) {
+// selection Sort function
+void selection_sort(int* arr, int size) {
     for (int i = 0; i < size - 1; ++i) {
         int minIndex = i;
         for (int j = i + 1; j < size; ++j) {
-            if (array[j] < array[minIndex]) {
+            if (arr[j] < arr[minIndex]) {
                 minIndex = j;
             }
         }
-        int temp = array[i];
-        array[i] = array[minIndex];
-        array[minIndex] = temp;
+        int temp = arr[i];
+        arr[i] = arr[minIndex];
+        arr[minIndex] = temp;
     }
 }
 

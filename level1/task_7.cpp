@@ -3,7 +3,6 @@
 
 void bubble_sort(int*, int);
 void selection_sort(int*, int);
-void scan (int*, int);
 
 typedef std::function<void(int*, int)> Sort_function;
 
@@ -78,10 +77,3 @@ void selection_sort(int* array, int size) {
     }
 }
 
-//print array elements
-void pscan(int* arr, int size){
-    for(int i = 0; i < size; ++i){
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl << std::endl;
-}

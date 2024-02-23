@@ -3,6 +3,10 @@
 
 void bubble_sort(int*, int);
 void selection_sort(int*, int);
+<<<<<<< HEAD
+=======
+
+>>>>>>> 9b55cd81b36bf153d5596f8394f8b971b5bb2e2e
 typedef std::function<void(int*, int)> Sort_function;
 
 int main() {

@@ -2,7 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include "task15.h"
+#include "task16.h"
 
 SortingStrategy::~SortingStrategy()
 {}
@@ -20,7 +20,7 @@ void BubbleSort::sort(std::vector<int>& vec) {
         if (!flag){
           break;
         }
-     
+
      }
 
 }
@@ -55,25 +55,33 @@ std::vector<int>  FileHandler::read_file(std::string& name)
 
 void FileHandler::save_file(std::string& name, std::vector<int> vec)
 {
-    std::ofstream out_f(name);
-    if (!out_f.is_open()) {
+    std::ofstream out_file(name);
+    if (!out_file.is_open()) {
         throw std::invalid_argument("Don't open output file!");
         }
 
     for (int num : vec) {
-        out_f << num << " ";
+        out_file << num << " ";
     }
-    out_f.close();
+    out_file.close();
 }
 
+FileHandler::~FileHandler() {
+    if (in_file.is_open()) {
+        in_file.close();
+    }
+    if (out_file.is_open()) {
+        out_file.close();
+    }
+}
 
-SortingApp::SortingApp() 
-    :strategy(nullptr) 
+SortingApp::SortingApp()
+    :strategy(nullptr)
 {}
 
 SortingApp::~SortingApp()
 {
-        delete strategy;
+    delete strategy;
 }
 
 void SortingApp::select_sort()
@@ -105,5 +113,3 @@ void SortingApp::files(std::string& in_f, std::string& out_f) {
     strategy->sort(vec);
     fileHandler.save_file(out_f, vec);
 }
-
-
